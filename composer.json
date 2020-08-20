@@ -1,0 +1,9 @@
+{
+  "name": "cxl/phpcs-ruleset",
+  "description": "PHP CS coding standards for CXL projects.",
+  "type": "phpcodesniffer-standard",
+  "require": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+    "wp-coding-standards/wpcs": "^2.3"
+  }
+}

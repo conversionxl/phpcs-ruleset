@@ -20,8 +20,8 @@ Run with:
 ### Dependency
 
 ```
-config repositories.phpcs-ruleset vcs https://github.com/conversionxl/phpcs-ruleset
-composer require cxl/phpcs-ruleset --dev
+composer config repositories.phpcs-ruleset vcs https://github.com/conversionxl/phpcs-ruleset
+composer require cxl/phpcs-ruleset:dev-master --dev
 ```
 
 Create or modify `phpcs.xml` in project root:

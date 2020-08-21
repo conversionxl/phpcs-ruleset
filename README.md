@@ -20,6 +20,7 @@ Run with:
 ### Dependency
 
 ```
+config repositories.phpcs-ruleset vcs https://github.com/conversionxl/phpcs-ruleset
 composer require cxl/phpcs-ruleset --dev
 ```
 

@@ -1,23 +1,14 @@
 <?xml version="1.0"?>
 <ruleset name="CXL">
 
-    <!--  Initial rules moved out from https://github.com/lkraav/WordPress-Coding-Standards/blob/conversionready/Conversion-Ready/ruleset.xml  -->
-
-    <!-- Spaces, not tabs -->
+    <!-- Spaces, not tabs. -->
     <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
 
     <!--
-    We may also want to to include all the rules in a standard
+    We may also want to to include all the rules in WP standard.
     -->
     <rule ref="WordPress-Core">
-        <!--
-        We may want a middle ground though. The best way to do this is add the
-        entire ruleset, then rule by rule, remove ones that don't suit a project. We
-        can do this by running `phpcs` with the '-s' flag, to see the names of the
-        different Sniffs, as their rules are broken. From here, we can opt to
-        exclude problematic sniffs like so.
-        -->
-        <!-- Spaces, not tabs -->
+        <!-- Spaces, not tabs. -->
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
     </rule>
 
@@ -31,6 +22,7 @@
         if ( foo ) {
             bar();
         }
+
     }
     ```
     -->
@@ -44,13 +36,26 @@
         <!-- WP filename conventions are incompatible w/ Composer PSR-4 autoloader. -->
         <exclude name="WordPress.Files.FileName"/>
 
-        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+        <!-- Short array syntax ftw. -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
 
-        <!-- End of line typically handled on Git level, this causes cross-platform false positives. -->
-        <exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
+        <!-- Short ternary ftw. -->
+        <exclude name="WordPress.PHP.DisallowShortTernary.Found"/>
+    </rule>
 
-        <!-- This is just annoying in practice. -->
-        <exclude name="Squiz.PHP.CommentedOutCode.Found" />
+    <!--
+    Custom templating frameworks etc.
+    @see https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#xss-custom-printing-functions
+    @todo Method elements don't work!
+    -->
+    <rule ref="WordPress.Security.EscapeOutput">
+        <properties>
+            <property name="customAutoEscapedFunctions" type="array">
+                <element value="cxli"/>
+                <element value="get_view_instance"/>
+                <element value="render"/>
+            </property>
+        </properties>
     </rule>
 
     <!--
@@ -68,4 +73,31 @@
     <rule ref="PEAR.Functions.FunctionCallSignature.CloseBracketLine">
         <severity>0</severity>
     </rule>
+
+    <rule ref="Squiz.Commenting">
+        <!--
+        "So far I have not found a use for file-level DocBlocks in closed-source software."
+        @see https://localheinz.com/blog/2018/05/06/cost-and-value-of-docblocks/
+        -->
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        <exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+
+        <!-- Usually just repeats the obvious. -->
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
+
+        <!-- `//end if` looks silly. -->
+        <exclude name="Squiz.Commenting.LongConditionClosingComment.Missing"/>
+
+        <!-- Sometimes useful to describe array members. -->
+        <exclude name="Squiz.Commenting.PostStatementComment.Found"/>
+    </rule>
+
+    <rule ref="Generic.Commenting">
+        <!-- Often just /** @since */ is enough. -->
+        <exclude name="Generic.Commenting.DocComment.MissingShort"/>
+        <!-- /** @todo */ is useful. -->
+        <exclude name="Generic.Commenting.Todo.CommentFound"/>
+        <exclude name="Generic.Commenting.Todo.TaskFound"/>
+    </rule>
+
 </ruleset>

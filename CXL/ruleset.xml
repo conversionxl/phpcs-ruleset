@@ -39,6 +39,35 @@
         <!-- /** @todo */ is useful. -->
         <exclude name="Generic.Commenting.Todo.CommentFound"/>
         <exclude name="Generic.Commenting.Todo.TaskFound"/>
+
+        <!-- Core naming rules are too rigid and don't work well in other projects. -->
+        <exclude name="WordPress.NamingConventions.ValidVariableName"/>
+
+        <!-- Often complains about non-issues. -->
+        <exclude name="WordPress.Security.NonceVerification.Recommended"/>
+        <exclude name="WordPress.Security.ValidatedSanitizedInput" />
+
+        <!-- Unnecessary on simple methods. -->
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+
+        <!-- Unnecessary more often than not. -->
+        <exclude name="Squiz.Commenting.ClassComment"/>
+
+        <!-- Not an actual problem. -->
+        <exclude name="Squiz.PHP.CommentedOutCode.Found"/>
+
+        <!-- Complains when there is a comment on top that is NOT a file comment. -->
+        <exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"/>
+
+        <!-- Complains about URLs and other perfectly normal uses. -->
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+        <exclude name="Generic.Commenting.DocComment.ShortNotCapital"/>
+
+        <!-- Git on Windows checks out Windows, commits Linux line endings by defaults. -->
+        <exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+
+        <!-- Upstream translated strings. -->
+        <exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
     </rule>
 
     <!--
@@ -86,6 +115,11 @@
         <severity>0</severity>
     </rule>
     <rule ref="PEAR.Functions.FunctionCallSignature.CloseBracketLine">
+        <severity>0</severity>
+    </rule>
+
+    <!-- False positive on failed symlinks on Windows. -->
+    <rule ref="Internal.NoCodeFound">
         <severity>0</severity>
     </rule>
 

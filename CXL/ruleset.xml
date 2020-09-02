@@ -25,6 +25,7 @@
         <exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
 
         <!-- Usually just repeats the obvious. -->
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
         <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
 
         <!-- `//end if` looks silly. -->
@@ -68,6 +69,25 @@
 
         <!-- Upstream translated strings. -->
         <exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
+
+        <!-- Often redundant. -->
+        <exclude name="Squiz.Commenting.FunctionComment.EmptyThrows" />
+
+        <!-- Doesn't make sense outside of core. -->
+        <exclude name="WordPress.DB.DirectDatabaseQuery" />
+        <exclude name="WordPress.DB.SlowDBQuery" />
+
+        <!-- Localization not relevant for the moment. -->
+        <exclude name="WordPress.WP.I18n" />
+
+        <!-- A cryptic and unproductive white space sniff. -->
+        <exclude name="WordPress.WhiteSpace.PrecisionAlignment" />
+
+        <!-- Used on purpose for logging. -->
+        <exclude name="WordPress.PHP.DevelopmentFunctions" />
+
+        <!-- There is some unconventional use for inline scripts. -->
+        <exclude name="WordPress.WP.EnqueuedResourceParameters" />
     </rule>
 
     <!--

@@ -88,6 +88,15 @@
 
         <!-- There is some unconventional use for inline scripts. -->
         <exclude name="WordPress.WP.EnqueuedResourceParameters" />
+
+        <!-- Escaping is too complicated for reliable automation. -->
+        <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
+
+        <!-- Intentionally used in several places. -->
+        <exclude name="WordPress.WP.GlobalVariablesOverride.Prohibited" />
+
+        <!-- Used quite a bit, needs either careful rework or nto careful bulk change to gmdate(). -->
+        <exclude name="WordPress.DateTime.RestrictedFunctions.date_date" />
     </rule>
 
     <!--

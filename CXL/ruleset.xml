@@ -97,6 +97,10 @@
 
         <!-- Used quite a bit, needs either careful rework or nto careful bulk change to gmdate(). -->
         <exclude name="WordPress.DateTime.RestrictedFunctions.date_date" />
+
+		<!-- Unnecessary for typed properties. -->
+        <exclude name="Squiz.Commenting.VariableComment.Missing" />
+        <exclude name="Squiz.Commenting.VariableComment.MissingVar" />
     </rule>
 
     <!--

@@ -83,6 +83,7 @@
         <exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
 
         <!-- Usually just repeats the obvious. -->
+        <exclude name="Squiz.Commenting.FunctionComment.EmptyThrows"/>
         <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
 
         <!-- `//end if` looks silly. -->

@@ -101,4 +101,9 @@
         <exclude name="Generic.Commenting.Todo.TaskFound"/>
     </rule>
 
+    <!--
+    @see https://github.com/sirbrillig/phpcs-variable-analysis
+    -->
+    <rule ref="VariableAnalysis"/>
+
 </ruleset>

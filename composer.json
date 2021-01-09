@@ -7,7 +7,7 @@
   ],
   "require": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-    "sirbrillig/phpcs-variable-analysis": "^v3.0.0-beta.7",
+    "sirbrillig/phpcs-variable-analysis": "^v2.10.1",
     "wp-coding-standards/wpcs": "^2.3"
   },
   "scripts": {

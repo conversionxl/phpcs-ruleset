@@ -12,11 +12,6 @@ cd phpcs-ruleset
 composer install
 ```
 
-Run with:
-```
-"vendor/bin/phpcs" [path] -s
-```
-
 ### Dependency
 
 ```
@@ -33,7 +28,8 @@ Create or modify `phpcs.xml` in project root:
 </ruleset>
 ```
 
-Run with:
+### Run
+
 ```
-"vendor/bin/phpcs" -s
+$ composer exec -v phpcs -- -s [<file>] ...
 ```

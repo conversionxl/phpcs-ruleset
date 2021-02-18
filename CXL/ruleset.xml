@@ -104,6 +104,66 @@
     <!--
     @see https://github.com/sirbrillig/phpcs-variable-analysis
     -->
-    <rule ref="VariableAnalysis"/>
+    <rule ref="VariableAnalysis">
+        <!-- Slevomat -->
+        <exclude name="VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable"/>
+    </rule>
+
+    <!--
+    @see https://github.com/slevomat/coding-standard
+    -->
+    <rule ref="SlevomatCodingStandard">
+        <exclude name="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
+        <exclude name="SlevomatCodingStandard.Commenting.DisallowCommentAfterCode"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.NewWithParentheses.MissingParentheses"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
+        <exclude name="SlevomatCodingStandard.Files.LineLength"/>
+        <exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>
+        <exclude name="SlevomatCodingStandard.Functions.DisallowArrowFunction.DisallowedArrowFunction"/>
+        <exclude name="SlevomatCodingStandard.Functions.RequireMultiLineCall"/>
+        <exclude name="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
+        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified"/>
+        <exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
+        <exclude name="SlevomatCodingStandard.Classes.ParentCallSpacing.IncorrectLinesCountAfterLastControlStructure"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing"/>
+        <exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+        <properties>
+            <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
+        <properties>
+            <property name="ignoreOneLineTrailingIf" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration">
+        <properties>
+            <property name="spacesCountAfterKeyword" value="0"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+        <properties>
+            <property name="allowFullyQualifiedGlobalConstants" value="true"/>
+            <property name="allowFullyQualifiedExceptions" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces">
+        <properties>
+            <property name="ignoreSpacesInComment" value="true"/>
+            <property name="ignoreSpacesBeforeAssignment" value="true"/>
+        </properties>
+    </rule>
 
 </ruleset>

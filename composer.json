@@ -8,7 +8,8 @@
   "require": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
     "sirbrillig/phpcs-variable-analysis": "^v2.10.1",
-    "wp-coding-standards/wpcs": "^2.3"
+    "wp-coding-standards/wpcs": "^2.3",
+    "slevomat/coding-standard": "^6.4"
   },
   "scripts": {
     "post-install-cmd": "\"vendor/bin/phpcs\" --config-set default_standard CXL"

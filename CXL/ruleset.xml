@@ -181,4 +181,43 @@
         </properties>
     </rule>
 
+    <!-- Force phpDocs separation between different annotations and remove extra `*` -->
+    <!-- Require specific order of phpDoc annotations with empty newline between specific groups -->
+    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+        <properties>
+            <property name="linesCountBetweenAnnotationsGroups" value="0"/>
+            <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
+            <property name="annotationsGroups" type="array">
+                <element value="
+					@package,
+					@since,
+					@see,
+					@link,
+					@todo,
+                "/>
+                <element value="
+					@global,
+					@var,
+                "/>
+                <element value="
+					@var,
+					@param,
+					@return,
+                "/>
+                <element value="
+					@throws,
+					@internal,
+					@deprecated,
+                "/>
+                <element value="
+					@codeCoverageIgnore,
+					@phpcsSuppress,
+					@psalm-suppress,
+					@SuppressWarnings,
+					@dataProvider,
+                "/>
+            </property>
+        </properties>
+    </rule>
+
 </ruleset>

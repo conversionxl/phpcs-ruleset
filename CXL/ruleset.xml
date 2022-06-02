@@ -91,6 +91,16 @@
 
         <!-- Sometimes useful to describe array members. -->
         <exclude name="Squiz.Commenting.PostStatementComment.Found"/>
+
+        <!--
+            If method has multiple parameters, and TypeHint for fewer @param is defined,
+            it can detect incorrect type hint and also @param order.
+            Note:
+                If not excluded, `phpcbf` removes un-necessary @params,
+                and `phpcs` tries to detect them, hence circular issue.
+        -->
+        <exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+        <exclude name="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
     </rule>
 
     <rule ref="Generic.Commenting">
@@ -168,6 +178,45 @@
         <properties>
             <property name="ignoreSpacesInComment" value="true"/>
             <property name="ignoreSpacesBeforeAssignment" value="true"/>
+        </properties>
+    </rule>
+
+    <!-- Force phpDocs separation between different annotations and remove extra `*` -->
+    <!-- Require specific order of phpDoc annotations with empty newline between specific groups -->
+    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+        <properties>
+            <property name="linesCountBetweenAnnotationsGroups" value="0"/>
+            <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
+            <property name="annotationsGroups" type="array">
+                <element value="
+					@package,
+					@since,
+					@see,
+					@link,
+					@todo,
+                "/>
+                <element value="
+					@global,
+					@var,
+                "/>
+                <element value="
+					@var,
+					@param,
+					@return,
+                "/>
+                <element value="
+					@throws,
+					@internal,
+					@deprecated,
+                "/>
+                <element value="
+					@codeCoverageIgnore,
+					@phpcsSuppress,
+					@psalm-suppress,
+					@SuppressWarnings,
+					@dataProvider,
+                "/>
+            </property>
         </properties>
     </rule>
 

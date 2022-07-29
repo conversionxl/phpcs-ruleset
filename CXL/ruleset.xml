@@ -149,12 +149,6 @@
         <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
-        <properties>
-            <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
-        </properties>
-    </rule>
-
     <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
         <properties>
             <property name="ignoreOneLineTrailingIf" value="true"/>
@@ -185,7 +179,7 @@
     <!-- Require specific order of phpDoc annotations with empty newline between specific groups -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
-            <property name="linesCountBetweenAnnotationsGroups" value="0"/>
+            <property name="linesCountBetweenAnnotationsGroups" value="1"/>
             <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
             <property name="annotationsGroups" type="array">
                 <element value="
@@ -194,22 +188,14 @@
 					@see,
 					@link,
 					@todo,
-                "/>
-                <element value="
 					@global,
 					@var,
-                "/>
-                <element value="
 					@var,
 					@param,
 					@return,
-                "/>
-                <element value="
 					@throws,
 					@internal,
 					@deprecated,
-                "/>
-                <element value="
 					@codeCoverageIgnore,
 					@phpcsSuppress,
 					@psalm-suppress,

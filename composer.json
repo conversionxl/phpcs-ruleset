@@ -13,5 +13,10 @@
   },
   "scripts": {
     "post-install-cmd": "\"vendor/bin/phpcs\" --config-set default_standard CXL"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

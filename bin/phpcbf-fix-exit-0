@@ -12,6 +12,8 @@
 
 if (is_file(__DIR__.'/../../../squizlabs/php_codesniffer/autoload.php') === true) {
     include_once __DIR__.'/../../../squizlabs/php_codesniffer/autoload.php';
+} elseif (is_file(__DIR__.'/../vendor/squizlabs/php_codesniffer/autoload.php') === true) {
+    include_once __DIR__.'/../vendor/squizlabs/php_codesniffer/autoload.php';
 } else {
     include_once 'PHP/CodeSniffer/autoload.php';
 }

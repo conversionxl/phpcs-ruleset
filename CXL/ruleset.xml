@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
 <ruleset name="CXL">
 
+    <!-- Show progress and output sniff names on violation, and add colours -->
+    <arg value="p" />
+    <arg name="colors" />
+    <arg value="s" />
+
     <!-- Spaces, not tabs. -->
     <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
 
-    <!--
-    We may also want to to include all the rules in WP standard.
-    -->
+    <!-- We may also want to include all the rules in WP standard -->
     <rule ref="WordPress-Core">
         <!-- Spaces, not tabs. -->
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
     </rule>
 
-    <rule ref="WordPress-Extra">
-    </rule>
+    <rule ref="WordPress-Extra" />
 
     <!--
     Allow wider vertical spacing coding style:
@@ -41,6 +43,9 @@
 
         <!-- Short ternary ftw. -->
         <exclude name="WordPress.PHP.DisallowShortTernary.Found"/>
+
+        <!-- Only English, no translations. -->
+        <exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
     </rule>
 
     <!--
@@ -74,6 +79,11 @@
         <severity>0</severity>
     </rule>
 
+    <!-- Suppress rule that reports many false positives. -->
+    <rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis.VariableRedeclaration">
+        <severity>0</severity>
+    </rule>
+
     <rule ref="Squiz.Commenting">
         <!--
         "So far I have not found a use for file-level DocBlocks in closed-source software."
@@ -101,6 +111,8 @@
         -->
         <exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
         <exclude name="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
+        <exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
     </rule>
 
     <rule ref="Generic.Commenting">
@@ -124,29 +136,49 @@
     -->
     <rule ref="SlevomatCodingStandard">
         <exclude name="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
+        <!-- Don't really care about group order. We kinda do, but not enough to enforce -->
+        <exclude name="SlevomatCodingStandard.Classes.ClassStructure.IncorrectGroupOrder" />
         <exclude name="SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaMagicConstant"/>
         <exclude name="SlevomatCodingStandard.Classes.ParentCallSpacing.IncorrectLinesCountAfterLastControlStructure"/>
+        <!-- We can't declare classes as abstract/final because we have plenty of instances where classes are both -->
+        <!-- used themselves, and also extended (EG: almost all of our Plugin main file) -->
+        <exclude name="SlevomatCodingStandard.Classes.RequireAbstractOrFinal"/>
+        <!-- There is actually a bug with this sniffer. If you use doc annotation to disable a rule, this sniffer (sometimes) throws an "Undefined index" error -->
         <exclude name="SlevomatCodingStandard.Commenting.DisallowCommentAfterCode"/>
+        <!-- Multi or single line are both fine. Feel free to remove this exclusion if you prefer to enforce single line where they're possible -->
         <exclude name="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment.OneLinePropertyComment"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
+        <!-- Ternary shorthand is acceptable -->
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowShortTernaryOperator.DisallowedShortTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing"/>
+        <!-- There are two rules which conflict. NewWithoutParentheses and UselessParentheses. One must be disabled -->
+        <!-- We allow new Class(); rather than new Class;-->
         <exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.NewWithParentheses.MissingParentheses"/>
+        <!-- Disabled by default, but you may be interested in reading up on Yoda conditions to see if it's -->
+        <!-- something that you would like to start using: https://en.wikipedia.org/wiki/Yoda_conditions -->
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
         <exclude name="SlevomatCodingStandard.Files.LineLength"/>
         <exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>
         <exclude name="SlevomatCodingStandard.Functions.DisallowArrowFunction.DisallowedArrowFunction"/>
+        <!-- Length does not determine complexity. We do not care if methods or files are long -->
+        <exclude name="SlevomatCodingStandard.Functions.FunctionLength.FunctionLength"/>
+        <!-- Also this is deprecated -->
+        <exclude name="SlevomatCodingStandard.Files.FunctionLength.FunctionLength"/>
         <exclude name="SlevomatCodingStandard.Functions.RequireMultiLineCall"/>
-        <exclude name="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
+        <!-- We do not require trailing commas on multiline methods. -->
+        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
+        <!-- Global constants and exceptions do not need to be fully qualified -->
         <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants.NonFullyQualified"/>
         <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified"/>
+        <!-- We generally allow the use of any namespace -->
         <exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
+        <!-- Inline doc comments are fine. We use them quite often -->
+        <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
         <exclude name="SlevomatCodingStandard.PHP.RequireNowdoc.RequiredNowdoc"/>
+        <!-- Not something we do in CXL -->
         <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing"/>
-        <exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
-        <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
@@ -175,8 +207,8 @@
         </properties>
     </rule>
 
-    <!-- Force phpDocs separation between different annotations and remove extra `*` -->
-    <!-- Require specific order of phpDoc annotations with empty newline between specific groups -->
+    <!-- Force phpDocs separation between different annotations and remove extra `*`. -->
+    <!-- Require specific order of phpDoc annotations with empty newline between specific groups. -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
             <property name="linesCountBetweenAnnotationsGroups" value="1"/>
@@ -203,6 +235,22 @@
 					@dataProvider,
                 "/>
             </property>
+        </properties>
+    </rule>
+
+    <!-- Requires multiline ternary when line is too large. -->
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator">
+        <properties>
+            <property name="lineLengthLimit" value="120"/>
+        </properties>
+    </rule>
+
+
+    <!-- Complexity check often fails. -->
+    <!-- Each team/project can decide if they'd prefer to just tweak the complexity level rather than exclude this rule -->
+    <rule ref="SlevomatCodingStandard.Complexity.Cognitive">
+        <properties>
+            <property name="maxComplexity" value="10"/>
         </properties>
     </rule>
 

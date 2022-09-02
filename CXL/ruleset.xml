@@ -215,6 +215,7 @@
             <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
             <property name="annotationsGroups" type="array">
                 <element value="
+					@inheritDoc,
 					@package,
 					@since,
 					@see,

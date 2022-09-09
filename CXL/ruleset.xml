@@ -147,6 +147,8 @@
         <exclude name="SlevomatCodingStandard.Commenting.DisallowCommentAfterCode"/>
         <!-- Multi or single line are both fine. Feel free to remove this exclusion if you prefer to enforce single line where they're possible -->
         <exclude name="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment.OneLinePropertyComment"/>
+        <!-- We allow multiline doc comment for class or method when there's only 1 annotation present -->
+        <exclude name="SlevomatCodingStandard.Commenting.RequireOneLineDocComment.MultiLineDocComment"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
         <!-- Ternary shorthand is acceptable -->
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowShortTernaryOperator.DisallowedShortTernaryOperator"/>
@@ -215,6 +217,7 @@
             <property name="linesCountBetweenDifferentAnnotationsTypes" value="0"/>
             <property name="annotationsGroups" type="array">
                 <element value="
+					@inheritDoc,
 					@package,
 					@since,
 					@see,
